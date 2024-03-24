@@ -1,6 +1,7 @@
 package Functions;
 
 import com.csvreader.CsvReader;
+import edd.ABBHistorial;
 import edd.ABBReservaciones;
 import edd.Hashtable;
 import edd.Lista;
@@ -8,6 +9,7 @@ import edd.Nodo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import edd.Hashtable;
+import edd.NodoHistorial;
 
 /**
  * Clase de funciones para iniciar el programa.
@@ -123,6 +125,78 @@ public class BasicFunctions {
             pointer = pointer.getNext();
         }
         return hasht;
+    }
+    
+    /**  
+     * M&eacute;todo que Guarda el Hist&oacute;rico de las personas hospedadas.
+     * Hospedadas pues en el hotel a trav&eacute;s del archivo CSV.
+     * 
+     * @return lista del historial de habitaciones del hotel
+     */
+    public Lista<Client> Historial(){
+        Lista<Client> historial = new Lista<>(); // Lista donde guardaremos los datos del archivo
+        
+        try{
+            
+            CsvReader leerUsuarios = new CsvReader("test//Historico.csv");
+            leerUsuarios.readHeaders();
+            
+            // Mientras haya lineas obtenemos los datos del archivo
+            while(leerUsuarios.readRecord()) {
+                String ci = leerUsuarios.get(0);
+                ci = ci.replace(".","");
+                int cedula = Integer.parseInt(ci);
+
+                String f_name = leerUsuarios.get(1);
+                String l_name = leerUsuarios.get(2);
+                String email = leerUsuarios.get(3);
+                String gender = leerUsuarios.get(4);
+                String llegada = leerUsuarios.get(5);
+                String hab = leerUsuarios.get(6);
+                int num_hab = Integer.parseInt(hab);
+
+                Client cliente = new Client(cedula, f_name, l_name, email, gender, null, null, llegada, null, num_hab);
+                historial.insertFinal(cliente);
+                
+            }
+           
+            } catch(FileNotFoundException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        return historial;   
+    }
+    
+    /**
+     * M&eacute;todo que crea un ABB de tipo historial con 300 nodos.
+     * Luego agrega los datos existentes del historial de habitaciones.
+     * 
+     * @param history, lista del historial de habitaciones
+     * @return ABB que contiene el historial de habitaciones 
+     */
+    public ABBHistorial crearHistorial(Lista<Client> history){
+        /**
+        * Metodo que crea la estructura de Árbol para el Historial de Habitaciones
+        */
+        ABBHistorial historial = new ABBHistorial();
+        NodoHistorial root = new NodoHistorial(150);
+        NodoHistorial left = new NodoHistorial(75);
+        NodoHistorial right = new NodoHistorial(225);
+        historial.setRoot(root);
+        root.setLeftSon(left);
+        root.setRightSon(right);
+        for (int i = 1; i <301; i++) {
+            if (i!=150 && i!= 75 && i!=225 ){
+                historial.insertNodo(i, historial.getRoot());
+            }
+        }
+        for (int i = 0; i < history.getSize(); i++) {
+            Client current = (Client) history.getDato(i).getElement();
+            historial.insertarCliente(historial.getRoot(), current);
+        }
+        
+        return historial;
     }
     
 }
