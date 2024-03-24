@@ -114,12 +114,12 @@ public class BuscarReservaciones extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         try{
             String ci1 = Cedula.getText().replace(".", "");
-            int ci = Integer.parseInt(ci1);
+            int ci = Integer.parseInt(ci1.replace(" ", ""));
             Client client = reservas.buscarReservacion(reservas.getRoot(), ci);
             if(client==null){
                 JOptionPane.showMessageDialog(null, "No se consiguieron reservaciones con la CI\n"+Cedula.getText(), "No se encontró", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                Reservacion.setText("Reservación a nombre de: "+client.getName()+" "+client.getLastName()+"\n"+"Cédula de Identidad: "+client.getCedula()+"\n"+"Llegada: "+client.getLlegada()+" Salida: "+client.getSalida()+"\n"+"Tipo de Habitación: "+client.getTipoHab()+".");
+                Reservacion.setText("Reservación a nombre de: "+client.getName()+" "+client.getLastName()+"\n"+"Cédula de Identidad: "+client.getCedula()+"\n"+"Correo Electrónico: "+client.getEmail()+"\n"+"Llegada: "+client.getLlegada()+" Salida: "+client.getSalida()+"\n"+"Tipo de Habitación: "+client.getTipoHab()+".");
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Ingrese un número de cédula válido.\nEj. XX.XXX.XXX ó XXXXXXXX", "Input Incorrecto", JOptionPane.ERROR_MESSAGE);
