@@ -39,7 +39,7 @@ public class BuscarClientes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lastName = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        result = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -102,10 +102,10 @@ public class BuscarClientes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 80, 30));
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 340, 30));
+        result.setEditable(false);
+        result.setBackground(new java.awt.Color(255, 255, 255));
+        result.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jPanel1.add(result, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 400, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clientes (1).png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
@@ -138,7 +138,7 @@ public class BuscarClientes extends javax.swing.JFrame {
         
         int room=0;
         if (room != -1){
-            JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
+            result.setText("El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
         } else{
             JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" no se encuentra hospedado en el Hotel actualmente.");
         }
@@ -197,8 +197,8 @@ public class BuscarClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField lastName;
     private javax.swing.JTextField name;
+    private javax.swing.JTextField result;
     // End of variables declaration//GEN-END:variables
 }
