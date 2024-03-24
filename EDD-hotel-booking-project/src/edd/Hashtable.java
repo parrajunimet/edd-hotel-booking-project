@@ -2,6 +2,10 @@ package edd;
 
 import Functions.Client;
 
+/**
+ * 
+ * @author luigiperezp
+ */
 public class Hashtable {
 
     //Atributos de la clase

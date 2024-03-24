@@ -5,6 +5,8 @@
  */
 package Interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Camila Garcia
@@ -30,12 +32,12 @@ public class BuscarClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Nombre = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Apellido = new javax.swing.JTextField();
+        lastName = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -47,10 +49,15 @@ public class BuscarClientes extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Nombre.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        Nombre.setForeground(new java.awt.Color(102, 102, 102));
-        Nombre.setText("   Nombre");
-        jPanel1.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, 30));
+        name.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        name.setForeground(new java.awt.Color(102, 102, 102));
+        name.setText("   Nombre");
+        name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,15 +81,15 @@ public class BuscarClientes extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 110));
 
-        Apellido.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        Apellido.setForeground(new java.awt.Color(102, 102, 102));
-        Apellido.setText("  Apellido");
-        Apellido.addActionListener(new java.awt.event.ActionListener() {
+        lastName.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        lastName.setForeground(new java.awt.Color(102, 102, 102));
+        lastName.setText("  Apellido");
+        lastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApellidoActionPerformed(evt);
+                lastNameActionPerformed(evt);
             }
         });
-        jPanel1.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 210, 30));
+        jPanel1.add(lastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 210, 30));
 
         jButton2.setBackground(new java.awt.Color(210, 192, 137));
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -113,9 +120,9 @@ public class BuscarClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApellidoActionPerformed
+    private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ApellidoActionPerformed
+    }//GEN-LAST:event_lastNameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       InterfaceFunctions.VolverNosotros();
@@ -123,7 +130,28 @@ public class BuscarClientes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try{
+        String fName = name.getText().replace(" ", "");
+        String nombre = fName.substring(0, 1).toUpperCase() + fName.substring(1);
+        String lName = lastName.getText().replace(" ", "");
+        String apellido = lName.substring(0, 1).toUpperCase() + lName.substring(1); 
+        
+        int room=0;
+        if (room != -1){
+            JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
+        } else{
+            JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" no se encuentra hospedado en el Hotel actualmente.");
+        }
+        name.setText("");
+        lastName.setText("");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "ERROR - Recuerde ingresar un nombre y un apellido");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,8 +189,6 @@ public class BuscarClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Apellido;
-    private javax.swing.JTextField Nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
@@ -172,5 +198,7 @@ public class BuscarClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField lastName;
+    private javax.swing.JTextField name;
     // End of variables declaration//GEN-END:variables
 }
