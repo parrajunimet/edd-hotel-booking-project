@@ -5,6 +5,11 @@
  */
 package Interfaces;
 
+import Functions.Client;
+import edd.Lista;
+import javax.swing.JOptionPane;
+import static main.Main.historial;
+
 /**
  *
  * @author Camila Garcia
@@ -16,6 +21,10 @@ public class Historial extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false); 
+        hab.setText("");
+        datos.setEditable(false);
+        datos.setText("");
+        title.setText("Historial de la Habitacion");
     }
 
     /**
@@ -32,11 +41,12 @@ public class Historial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Cedula = new javax.swing.JTextField();
+        hab = new javax.swing.JTextField();
         Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Info = new javax.swing.JTextArea();
+        datos = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,17 +56,13 @@ public class Historial extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Historial");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("<VOLVER");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -71,20 +77,18 @@ public class Historial extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 110));
 
-        Cedula.setBackground(new java.awt.Color(255, 255, 255));
-        Cedula.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        Cedula.setForeground(new java.awt.Color(102, 102, 102));
-        Cedula.setText("   Numero Habitacion");
-        Cedula.addActionListener(new java.awt.event.ActionListener() {
+        hab.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        hab.setForeground(new java.awt.Color(102, 102, 102));
+        hab.setText("   Numero Habitacion");
+        hab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CedulaActionPerformed(evt);
+                habActionPerformed(evt);
             }
         });
-        jPanel1.add(Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, 30));
+        jPanel1.add(hab, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 210, 30));
 
         Buscar.setBackground(new java.awt.Color(210, 192, 137));
         Buscar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        Buscar.setForeground(new java.awt.Color(0, 0, 0));
         Buscar.setText("Buscar");
         Buscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,19 +96,23 @@ public class Historial extends javax.swing.JFrame {
                 BuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 80, 30));
+        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 80, 30));
 
-        Info.setEditable(false);
-        Info.setBackground(new java.awt.Color(255, 255, 255));
-        Info.setColumns(20);
-        Info.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        Info.setRows(5);
-        jScrollPane1.setViewportView(Info);
+        datos.setEditable(false);
+        datos.setBackground(new java.awt.Color(255, 255, 255));
+        datos.setColumns(20);
+        datos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        datos.setRows(5);
+        jScrollPane1.setViewportView(datos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 370, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 370, 120));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/habitacion (1).jpg"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, -1, -1));
+
+        title.setFont(new java.awt.Font("Times New Roman", 2, 13)); // NOI18N
+        title.setText("Historial de la habitación");
+        jPanel1.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondo.jpg"))); // NOI18N
@@ -116,17 +124,41 @@ public class Historial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CedulaActionPerformed
+    private void habActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_habActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CedulaActionPerformed
+    }//GEN-LAST:event_habActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-            int hab=0;
         try{
-            hab=Integer.parseInt(Cedula.getText());
-            
-        }catch(Exception e){
-            Info.setText("Ingrese un numero de cédula válido");
+            String habStr = hab.getText().trim();
+            int room = Integer.parseInt(habStr);
+            if(room<301 && room>0){
+            Lista history = historial.searchRoomHis(room, historial.getRoot());
+            if (history != null){
+                title.setText("Historial de la Habitacion N°"+room);
+                String info = "";
+                for (int i = 0; i < history.getSize(); i++) {
+                    Client cliente = (Client) history.getDato(i).getElement();
+                    info += "~ "+cliente.getName()+" "+cliente.getLastName()+" CI: "+cliente.getCedula()+"\n";
+                }
+                datos.setText(info);
+                hab.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Ningun cliente se ha hospedado en esta habitacion");
+                hab.setText("");
+                title.setText("Historial de la Habitacion N°");
+                datos.setText("Ningun cliente se ha hospedado en esta habitacion");
+            }} else{
+                JOptionPane.showMessageDialog(null, "ERROR - Recuerde ingresar unicamente numeros y que solo\ntenemos 300 habitaciones");    
+                hab.setText("");
+                title.setText("Historial de la Habitacion N°");
+                datos.setText("");
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "ERROR - Recuerde ingresar unicamente numeros y que solo\ntenemos 300 habitaciones");
+            hab.setText("");
+            title.setText("Historial de la Habitacion N°");
+            datos.setText("");
         }
     }//GEN-LAST:event_BuscarActionPerformed
 
@@ -174,8 +206,8 @@ public class Historial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
-    private javax.swing.JTextField Cedula;
-    private javax.swing.JTextArea Info;
+    private javax.swing.JTextArea datos;
+    private javax.swing.JTextField hab;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -184,5 +216,6 @@ public class Historial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }
