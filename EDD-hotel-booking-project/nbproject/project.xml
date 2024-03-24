@@ -9,6 +9,7 @@
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
+                <root id="test.folder.dir" name="CSVfiles"/>
             </test-roots>
         </data>
     </configuration>
