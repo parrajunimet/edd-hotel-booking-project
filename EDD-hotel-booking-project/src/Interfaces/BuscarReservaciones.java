@@ -5,6 +5,10 @@
  */
 package Interfaces;
 
+import Functions.Client;
+import javax.swing.JOptionPane;
+import static main.Main.reservas;
+
 /**
  *
  * @author Camila Garcia
@@ -29,8 +33,9 @@ public class BuscarReservaciones extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Cedula = new javax.swing.JTextField();
         Buscar = new javax.swing.JButton();
-        Info = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Reservacion = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,17 +45,13 @@ public class BuscarReservaciones extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Reservaciones");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("<VOLVER");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -65,10 +66,9 @@ public class BuscarReservaciones extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 110));
 
-        Cedula.setBackground(new java.awt.Color(255, 255, 255));
         Cedula.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         Cedula.setForeground(new java.awt.Color(102, 102, 102));
-        Cedula.setText("  Cedula");
+        Cedula.setText("Cedula");
         Cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CedulaActionPerformed(evt);
@@ -78,7 +78,6 @@ public class BuscarReservaciones extends javax.swing.JFrame {
 
         Buscar.setBackground(new java.awt.Color(210, 192, 137));
         Buscar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        Buscar.setForeground(new java.awt.Color(0, 0, 0));
         Buscar.setText("Buscar");
         Buscar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,14 +87,15 @@ public class BuscarReservaciones extends javax.swing.JFrame {
         });
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 80, 30));
 
-        Info.setEditable(false);
-        Info.setBackground(new java.awt.Color(255, 255, 255));
-        Info.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        Info.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 340, 30));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clients (1).jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 240, 410));
+
+        Reservacion.setColumns(20);
+        Reservacion.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
+        Reservacion.setRows(5);
+        jScrollPane1.setViewportView(Reservacion);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 340, 110));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 48)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondo.jpg"))); // NOI18N
@@ -112,13 +112,19 @@ public class BuscarReservaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_CedulaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-            int ci=0;
         try{
-            ci=Integer.parseInt(Cedula.getText());
-            
+            String ci1 = Cedula.getText().replace(".", "");
+            int ci = Integer.parseInt(ci1.replace(" ", ""));
+            Client client = reservas.buscarReservacion(reservas.getRoot(), ci);
+            if(client==null){
+                JOptionPane.showMessageDialog(null, "No se consiguieron reservaciones con la CI\n"+Cedula.getText(), "No se encontró", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                Reservacion.setText("Reservación a nombre de: "+client.getName()+" "+client.getLastName()+"\n"+"Cédula de Identidad: "+client.getCedula()+"\n"+"Correo Electrónico: "+client.getEmail()+"\n"+"Llegada: "+client.getLlegada()+" Salida: "+client.getSalida()+"\n"+"Tipo de Habitación: "+client.getTipoHab()+".");
+            }
         }catch(Exception e){
-            Info.setText("Ingrese un numero de cédula válido");
+            JOptionPane.showMessageDialog(null, "Ingrese un número de cédula válido.\nEj. XX.XXX.XXX ó XXXXXXXX", "Input Incorrecto", JOptionPane.ERROR_MESSAGE);
         }
+        Cedula.setText("Cédula");
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -164,7 +170,7 @@ public class BuscarReservaciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
     private javax.swing.JTextField Cedula;
-    private javax.swing.JTextField Info;
+    private javax.swing.JTextArea Reservacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -172,5 +178,6 @@ public class BuscarReservaciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
