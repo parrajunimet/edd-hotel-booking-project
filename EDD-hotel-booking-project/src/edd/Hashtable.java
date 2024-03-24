@@ -103,5 +103,30 @@ public class Hashtable {
         }
     }
     
+    /**
+     * Metodo que permite obtener el numero de habitacion de un huesped
+     * @param name, nombre del cliente cuyo numero de habitacion se quiere obtener
+     * @param lastName, apellido del cliente cuyo numero de habitacion se quiere obtener 
+     * @return numero de habitacion del cliente, o -1 si el cliente no se encuentra hospedado en el hotel
+     */
+    public int searchClient(String name, String lastName) {
+        int clave = hashCode(name, lastName);
+        if (array[clave] != null) {
+            for (int i = 0; i < array[clave].getSize(); i++) {
+                Client currentClient = (Client) array[clave].getDato(i).getElement();
+                if (currentClient.getLastName().equals(lastName)) {
+                    if (currentClient.getRoomNum() != -1) {
+                        return currentClient.getRoomNum();
+                    } else {
+                        System.out.println("El cliente aun no ha realizado el check-in y por lo tanto no se le ha asignado una habitacion");
+                    }
+                }
+            }
+        } else {
+            System.out.println("No se ha encontrado ningun cliente alojado bajo ese nombre");
+        }
+        return -1;
+    }
+    
 
 }

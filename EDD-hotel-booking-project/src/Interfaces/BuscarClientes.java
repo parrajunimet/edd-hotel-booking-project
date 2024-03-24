@@ -6,6 +6,7 @@
 package Interfaces;
 
 import javax.swing.JOptionPane;
+import static main.Main.hash;
 
 /**
  *
@@ -136,7 +137,7 @@ public class BuscarClientes extends javax.swing.JFrame {
         String lName = lastName.getText().replace(" ", "");
         String apellido = lName.substring(0, 1).toUpperCase() + lName.substring(1); 
         
-        int room=0;
+        int room = hash.searchClient(nombre, apellido);
         if (room != -1){
             result.setText("El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
         } else{
