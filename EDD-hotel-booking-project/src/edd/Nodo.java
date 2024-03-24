@@ -6,8 +6,8 @@ package edd;
 
 /**
  * Clase que define a los nodos que conforman a una lista dobkemente enlazada
- * @author alexandralecuna;
- * @param <T>, clase de los elemento de la lista, en este caso Client
+ * @author luigiperezp;
+ * @param <T>, clase de los elemento de la lista, en este caso Client.
  */
 public class Nodo<T> {
     

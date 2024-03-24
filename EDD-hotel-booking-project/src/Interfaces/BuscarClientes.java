@@ -21,6 +21,9 @@ public class BuscarClientes extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false); 
+        this.name.setText("Nombre");
+        this.lastName.setText("Apellido");
+        this.result.setText("");
     }
 
     /**
@@ -141,10 +144,14 @@ public class BuscarClientes extends javax.swing.JFrame {
         if (room != -1){
             result.setText("El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
         } else{
-            JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" no se encuentra hospedado en el Hotel actualmente.");
+            if(!"Nombre".equals(name.getText())&&!"Apellido".equals(lastName.getText())){
+                JOptionPane.showMessageDialog(null, "El cliente "+nombre+" "+apellido+" no se encuentra hospedado en el Hotel actualmente.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Recuerde ingresar nombre y apellido.");
+            }
         }
-        name.setText("");
-        lastName.setText("");
+        name.setText("Nombre");
+        lastName.setText("Apellido");
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "ERROR - Recuerde ingresar un nombre y un apellido");
         }

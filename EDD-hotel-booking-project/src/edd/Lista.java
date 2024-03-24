@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 
 /**
  * Clase que define a una lista doblemente enlazada
- * @author alexandralecuna
- * @param <T>, Objeto de tipo Client 
+ * @author luigiperezp
+ * @param <T>, Objeto de tipo Client con sus datos
  */
 public class Lista<T> {
     
