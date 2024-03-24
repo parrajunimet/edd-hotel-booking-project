@@ -116,7 +116,7 @@ public class BuscarReservaciones extends javax.swing.JFrame {
             if(client==null){
                 JOptionPane.showMessageDialog(null, "No se consiguieron reservaciones con la CI\n"+Cedula.getText(), "No se encontró", JOptionPane.INFORMATION_MESSAGE);
             }else{
-                Reservacion.setText(client.getName()+"\n"+client.getLastName());
+                Reservacion.setText("Reservación a nombre de: "+client.getName()+"\n"+client.getLastName());
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Ingrese un número de cédula válido.\nEj. XX.XXX.XXX ó XXXXXXXX", "Input Incorrecto", JOptionPane.ERROR_MESSAGE);

@@ -32,7 +32,7 @@ public class BasicFunctions {
         
         try{
             
-            CsvReader leerUsuarios = new CsvReader("test//Reservaciones.csv");
+            CsvReader leerUsuarios = new CsvReader("test//Reservas.csv");
             leerUsuarios.readHeaders();
             
             // Mientras haya lineas se obtienen los datos del archivo
