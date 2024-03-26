@@ -9,11 +9,11 @@ import Functions.Client;
  * @version 8 marzo 2024
  * @author nelsoncarrillo
  */
-public class NodoReservacion {
+public class NodoReservas {
     
     //Atributos de la clase
     private Client element;
-    private NodoReservacion rightSon,leftSon,father;
+    private NodoReservas rightSon,leftSon,father;
 
     /**
      * Constructor de la clase.
@@ -21,7 +21,7 @@ public class NodoReservacion {
      * 
      * @param element cliente a almacenar en el nodo.
      */
-    public NodoReservacion(Client element) {
+    public NodoReservas(Client element) {
         this.element = element;
         this.rightSon = this.leftSon = this.father = null;
     }
@@ -48,7 +48,7 @@ public class NodoReservacion {
      * Metodo que permite obtener el hijo derecho del nodo actual
      * @return hijo derecho del nodo actual
      */
-    public NodoReservacion getRightSon() {
+    public NodoReservas getRightSon() {
         return rightSon;
     }
 
@@ -56,7 +56,7 @@ public class NodoReservacion {
      * Metodo que permite modificar el hijo derecho del nodo actual
      * @param rightSon, nuevo hijo derecho del nodo actual
      */
-    public void setRightSon(NodoReservacion rightSon) {
+    public void setRightSon(NodoReservas rightSon) {
         this.rightSon = rightSon;
     }
 
@@ -64,7 +64,7 @@ public class NodoReservacion {
      * Metodo que permite obtener el hijo izquierdo del nodo actual
      * @return hijo izquierdo del nodo actual
      */
-    public NodoReservacion getLeftSon() {
+    public NodoReservas getLeftSon() {
         return leftSon;
     }
 
@@ -72,7 +72,7 @@ public class NodoReservacion {
      * Metodo que permite modificar el hijo izquierdo del nodo actual
      * @param leftSon, nuevo hijo izquierdo del nodo actual
      */
-    public void setLeftSon(NodoReservacion leftSon) {
+    public void setLeftSon(NodoReservas leftSon) {
         this.leftSon = leftSon;
     }
 
@@ -80,7 +80,7 @@ public class NodoReservacion {
      * Metodo que permite obtener el padre del nodo actual
      * @return padre del nodo actual
      */
-    public NodoReservacion getFather() {
+    public NodoReservas getFather() {
         return father;
     }
 
@@ -88,7 +88,7 @@ public class NodoReservacion {
      * Metodo que permite modificar el padre del nodo actual
      * @param father, nuevo padre del nodo actual
      */
-    public void setFather(NodoReservacion father) {
+    public void setFather(NodoReservas father) {
         this.father = father;
     }
     
