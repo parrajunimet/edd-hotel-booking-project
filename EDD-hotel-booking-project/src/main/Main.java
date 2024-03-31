@@ -14,6 +14,7 @@ public class Main {
     public static Hashtable hash;
     public static ABBReservaciones reservas;
     public static ABBHistorial historial;
+    public static Lista habitaciones;
     
     /**
      * @param args the command line arguments
@@ -33,6 +34,10 @@ public class Main {
         // Historial de Habitaciones
         Lista<Client> history = func.Historial();
         historial = func.crearHistorial(history);
+
+        // Habitaciones
+        habitaciones = func.Habitaciones();
+        habitaciones = func.createHabitacionesDisponibles(habitaciones, guests);
         
         //GUI principal
         Nosotros nosotros = new Nosotros();
