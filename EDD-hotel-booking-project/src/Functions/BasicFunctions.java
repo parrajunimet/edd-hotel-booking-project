@@ -3,13 +3,13 @@ package Functions;
 import com.csvreader.CsvReader;
 import edd.ABBHistorial;
 import edd.ABBReservaciones;
-import edd.Hashtable;
 import edd.Lista;
 import edd.Nodo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import edd.Hashtable;
 import edd.NodoHistorial;
+import static main.Main.habitaciones;
 
 /**
  * Clase de funciones para iniciar el programa.
@@ -197,6 +197,63 @@ public class BasicFunctions {
         }
         
         return historial;
+    }
+    
+    public Lista<Habitacion> createHabitacionesDisponibles (Lista<Habitacion> habitaciones, Lista <Client> guests){
+        for (int i = 0; i < guests.getSize(); i++) {
+            Client current = (Client) guests.getDato(i).getElement();
+            int num_hab = current.getRoomNum();
+            Habitacion room = (Habitacion) habitaciones.getDato(num_hab-1).getElement();
+            room.setAvailable(false);
+        }
+        return habitaciones;
+        
+    }
+    
+    public Lista<Habitacion> Habitaciones(){
+        try{
+            Lista<Habitacion> rooms = new Lista<>();
+            
+            CsvReader leerHab = new CsvReader("test//Habitaciones.csv");
+            leerHab.readHeaders();
+            
+            while(leerHab.readRecord()) {
+                String hab = leerHab.get(0);
+                int numero = Integer.parseInt(hab);
+                
+                String tipo_hab = leerHab.get(1);
+                
+                String piso = leerHab.get(2);
+                int num_piso = Integer.parseInt(piso);
+                
+                Habitacion room = new Habitacion(numero, tipo_hab, num_piso);
+                rooms.insertFinal(room);
+
+            }
+            
+            return rooms;
+            
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        } 
+        return null; 
+    } 
+    
+    public int habitacionDisponible(Client cliente) {
+        
+        String roomType = cliente.getTipoHab();
+        for (int i = 0; i < habitaciones.getSize(); i++) {
+            Habitacion room = (Habitacion) habitaciones.getDato(i).getElement();
+            if (room.isAvailable()) {
+                if (roomType.equals(room.getTipo())) {
+                    room.setAvailable(false);
+                    return room.getNumero();
+                }
+            }
+        }
+        return -1;
     }
     
 }

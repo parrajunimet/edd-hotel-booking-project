@@ -116,7 +116,7 @@ public class ABBReservaciones {
      * @param raiz del arbol
      * @param previousNode, nodo previo al actual
      */
-    public void deleteNodo(Client element, NodoReservas raiz, NodoReservas previousNode) {
+    public void deleteNodo(Client element, NodoReservas raiz, NodoReservas previousNode){
         if (isEmpty()) {
             System.out.println("There are no elements to delete");
         } else {
@@ -228,6 +228,24 @@ public class ABBReservaciones {
         }
         return found;
     }
+    
+    public NodoReservas getNodo(NodoReservas root, Client element) {
+        NodoReservas found = null;
+        if (!isEmpty()) {
+            if (root == null) {
+                System.out.println("No se consiguio el nodo");
+            } else {
+                if (element.getCedula() == root.getElement().getCedula()) {
+                    found = root;
+                } else if (element.getCedula() < root.getElement().getCedula()) {
+                    return getNodo(root.getLeftSon(), element);
+                } else {
+                    return getNodo(root.getRightSon(), element);
+                }
+            }
+        }
+        return found;
+    }
 
     /**
      * Metodo que permite obtener un objeto de tipo Client a partir de su numero de cedula
@@ -250,7 +268,5 @@ public class ABBReservaciones {
             }
         }return null;
     }
-
-    
     
 }
