@@ -118,12 +118,12 @@ public class Hashtable {
                     if (currentClient.getRoomNum() != -1) {
                         return currentClient.getRoomNum();
                     } else {
-                        System.out.println("El cliente aun no ha realizado el check-in y por lo tanto no se le ha asignado una habitacion");
+                        System.out.println("El cliente aun no ha realizado el check-in");
                     }
                 }
             }
         } else {
-            System.out.println("No se ha encontrado ningun cliente alojado bajo ese nombre");
+            System.out.println("No se ha encontrado ningun cliente");
         }
         return -1;
     }
@@ -136,15 +136,48 @@ public class Hashtable {
                     if (currentClient.getRoomNum() != -1) {
                         return currentClient;
                     } else {
-                        System.out.println("El cliente aun no ha realizado el check-in y por lo tanto no se le ha asignado una habitacion");
+                        System.out.println("El cliente aun no ha realizado el check-in");
                     }
                 }
             }
         } else {
-            System.out.println("No se ha encontrado ningun cliente alojado bajo ese nombre");
+            System.out.println("No se ha encontrado ningun cliente");
         }
         return null;
     }
     
+    public void removeClient(String name, String lastName) {
+        int clave = hashCode(name, lastName);
+        if (array[clave] != null) {
+            for (int i = 0; i < array[clave].getSize(); i++) {
+                Client currentClient = (Client) array[clave].getDato(i).getElement();
+                if (currentClient.getLastName().equals(lastName)) {
+                    if (currentClient.getRoomNum() != -1) {
+                        array[clave].deleteInIndex(i);
+                    } else {
+                        System.out.println("El cliente aun no ha realizado el check-in");
+                    }
+                }
+            }
+        } else {
+            System.out.println("No se ha encontrado ningun cliente");
+        }
+    }
+    
+    
+    public boolean isClient(Client cliente) {
+        boolean check = false;
+        String name = cliente.getName();
+        String lastName = cliente.getLastName();
+        int key = hashCode(name, lastName);
+        if (array[key] != null) {
+            for (int i = 0; i < array[key].getSize(); i++) {
+                if (array[key].getDato(i).getElement() == cliente) {
+                    check = true;
+                }
+
+            }
+        }return check;
+    }
 
 }
