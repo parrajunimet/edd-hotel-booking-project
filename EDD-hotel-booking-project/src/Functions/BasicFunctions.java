@@ -256,4 +256,12 @@ public class BasicFunctions {
         return -1;
     }
     
+        public void cleanRoom(Client cliente){
+        
+        int roomNum = cliente.getRoomNum();
+        Habitacion room = (Habitacion) habitaciones.getDato(roomNum-1).getElement();
+        room.setAvailable(true);
+        cliente.setRoomNum(-1);
+    }
+    
 }

@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Functions.BasicFunctions;
 import Functions.Client;
 import javax.swing.JOptionPane;
 import static main.Main.hash;
@@ -132,22 +133,30 @@ public class Checkout extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
+        BasicFunctions func = new BasicFunctions();
         String fName = name.getText().replace(" ", "");
         String nombre = fName.substring(0, 1).toUpperCase() + fName.substring(1);
         String lName = lastName.getText().replace(" ", "");
         String apellido = lName.substring(0, 1).toUpperCase() + lName.substring(1); 
         
         int room = hash.searchClient(nombre, apellido);
+        Client cliente = hash.getCLient(nombre, apellido);
         if (room != -1){
-            result.setText("El cliente "+nombre+" "+apellido+" se encuentra hospedado en la habitacion N°"+room+".");
+            if (hash.isClient(cliente)) {
+                hash.removeClient(cliente.getName(), cliente.getLastName());
+                historial.insertarCliente(historial.getRoot(), cliente);
+                func.cleanRoom(cliente);
+                result.setText("Checkout Exitoso, vuelva pronto!");
+            } else {
+                result.setText( "El cliente"+cliente.getName()+" "+cliente.getLastName()+" no se encuentra hospedado en el Hotel.");
+            }
         } else{
             if(!"Nombre".equals(name.getText())&&!"Apellido".equals(lastName.getText())){
-                Client cliente = hash.getCLient(nombre, apellido);
+                result.setText("El cliente "+nombre+" "+apellido+" no se encuentra hospedado en el Hotel actualmente.");
             }else{
-                JOptionPane.showMessageDialog(null, "Recuerde ingresar nombre y apellido.");
+                result.setText("Recuerde ingresar nombre y apellido.");
             }
         }
-        
         name.setText("Nombre");
         lastName.setText("Apellido");
         } catch (Exception e){
